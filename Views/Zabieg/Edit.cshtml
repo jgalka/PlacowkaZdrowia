@@ -1,0 +1,58 @@
+﻿@model PlacowkaZdrowia.Models.Zabieg
+
+@{
+    ViewBag.Title = "Edycja";
+}
+
+<h2>Edycja</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Zabieg</legend>
+
+        @Html.HiddenFor(model => model.ZabiegID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ZabiegID)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.ZabiegID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tytul)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tytul)
+            @Html.ValidationMessageFor(model => model.Tytul)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Koszty)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Koszty)
+            @Html.ValidationMessageFor(model => model.Koszty)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DzialID, "Dział")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DzialID", String.Empty)
+            @Html.ValidationMessageFor(model => model.DzialID)
+        </div>
+
+        <p>
+            <input type="submit" value="Zapisz" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Powrót do listy", "Index")
+</div>

@@ -1,0 +1,53 @@
+﻿@model PlacowkaZdrowia.Models.Pacjent
+
+@{
+    ViewBag.Title = "Szczegoly";
+}
+
+<h2>Szczegóły</h2>
+
+<fieldset>
+    <legend>Pacjent</legend>
+
+    <div class="display-label">Nazwisko</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nazwisko)
+    </div>
+
+    <div class="display-label">Imie</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imie)
+    </div>
+
+    <div class="display-label">Data rejestracji</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataRejestracji)
+    </div>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.Rejestracje)
+    </div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Nazwa zabiegu</th>
+                <th>Typ</th>
+            </tr>
+            @foreach (var item in Model.Rejestracje)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zabieg.Tytul)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Typ)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id=Model.OsobaID }) |
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>

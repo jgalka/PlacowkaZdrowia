@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PlacowkaZdrowia.Models.Dzial>
+
+@{
+    ViewBag.Title = "Dzial";
+}
+
+<h2>Działy</h2>
+
+<p>
+    @Html.ActionLink("Utwórz nowy", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>Nazwa</th>
+        <th>Budget</th>
+        <th>Start Date</th>
+        <th>Administrator</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edycja", "Edit", new { id=item.DzialID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.DzialID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.DzialID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Budget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Administrator.FullName)
+        </td>
+    </tr>
+}
+
+</table>

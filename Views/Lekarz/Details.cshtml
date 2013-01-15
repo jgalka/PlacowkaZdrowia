@@ -1,0 +1,31 @@
+﻿@model PlacowkaZdrowia.Models.Lekarz
+
+@{
+    ViewBag.Title = "Szczegoly";
+}
+
+<h2>Szczegóły</h2>
+
+<fieldset>
+    <legend>Lekarz</legend>
+
+    <div class="display-label">Nazwisko</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nazwisko)
+    </div>
+
+    <div class="display-label">Imie</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imie)
+    </div>
+
+    <div class="display-label">Hire Date</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HireDate)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id=Model.OsobaID }) |
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>

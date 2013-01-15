@@ -1,0 +1,33 @@
+﻿@model PlacowkaZdrowia.Models.Pacjent
+
+@{
+    ViewBag.Title = "Usun";
+}
+
+<h2>Usuń</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3>Czy na pewno chcesz usunąć?</h3>
+<fieldset>
+    <legend>Pacjent</legend>
+
+    <div class="display-label">Nazwisko</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nazwisko)
+    </div>
+
+    <div class="display-label">Imie</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imie)
+    </div>
+
+    <div class="display-label">Data rejestracji</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataRejestracji)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Usuń" /> |
+        @Html.ActionLink("Powrót do listy", "Index")
+    </p>
+}

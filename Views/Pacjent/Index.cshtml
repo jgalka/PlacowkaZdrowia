@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<PlacowkaZdrowia.Models.Pacjent>
+
+@{
+    ViewBag.Title = "Pacjenci";
+}
+
+<h2>Pacjenci</h2>
+
+<p>
+    @Html.ActionLink("Utwórz nowy", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Znajdź przy pomocy nazwy: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) &nbsp;
+        <input type="submit" value="Szukaj" /></p>
+}
+<table>
+<tr>
+    <th></th>
+    <th>
+        @Html.ActionLink("Nazwisko", "Index", new { sortOrder=ViewBag.NameSortParm, currentFilter=ViewBag.CurrentFilter })
+    </th>
+    <th>
+        Imie
+    </th>
+    <th>
+        @Html.ActionLink("Data rejestracji", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+    </th>
+</tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.OsobaID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.OsobaID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.OsobaID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwisko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataRejestracji)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+    &nbsp;
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink("< Poprzednia", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw("&nbsp;");
+        @:< Prev
+    }
+    &nbsp;
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Następna >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+        @Html.Raw("&nbsp;");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw("&nbsp;")
+        @:>>
+    }
+</div>

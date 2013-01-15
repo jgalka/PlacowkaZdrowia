@@ -1,0 +1,51 @@
+﻿@model PlacowkaZdrowia.Models.Dzial
+
+@{
+    ViewBag.Title = "Usun";
+}
+
+<h2>Usuń</h2>
+
+<p class="error">@ViewBag.ConcurrencyErrorMessage</p>
+
+<h3>Czy na pewno chcesz usunąć?</h3>
+<fieldset>
+    <legend>Dzial</legend>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.Budget)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Budget)
+    </div>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.StartDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDate)
+    </div>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.OsobaID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Administrator.FullName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.HiddenFor(model => model.DzialID)
+    @Html.HiddenFor(model => model.Timestamp)
+    <p>
+        <input type="submit" value="Usuń" /> |
+        @Html.ActionLink("Powrót do listy", "Index")
+    </p>
+}
+

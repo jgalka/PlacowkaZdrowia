@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PlacowkaZdrowia.Models.Zabieg>
+
+@{
+    ViewBag.Title = "Zabiegi";
+}
+
+<h2>Zabiegi</h2>
+
+<p>
+    @Html.ActionLink("Utwórz nowy", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>Wybierz dzial: @Html.DropDownList("SelectedDzial","All") &nbsp; 
+    <input type="submit" value="Filtruj" /></p>
+}
+
+<table>
+    <tr>
+        <th></th>
+        <th>Numer</th>
+        <th>Tytuł</th>
+        <th>Koszty</th>
+        <th>Działy</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.ZabiegID }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.ZabiegID }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.ZabiegID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZabiegID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Koszty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dzial.Name)
+        </td>
+    </tr>
+}
+</table>

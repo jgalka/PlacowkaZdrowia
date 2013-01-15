@@ -1,0 +1,29 @@
+﻿@model PlacowkaZdrowia.Models.Zabieg
+
+@{
+    ViewBag.Title = "UpdateZabiegKoszt";
+}
+
+<h2>Aktualizacja kosztów zabiegów</h2>
+
+@if (ViewBag.RowsAffected == null)
+{
+    using (Html.BeginForm())
+    {
+        <p>
+            Podaj wartość dla zmiany cen zabiegów w postaci liczby całkkowitej: @Html.TextBox("multiplier")
+        </p>
+        <p>
+            <input type="submit" value="Uaktualnij" />
+        </p>
+    }
+}
+@if (ViewBag.RowsAffected != null)
+{
+    <p>
+        Numer rzędu do aktualizacji: @ViewBag.RowsAffected
+    </p>
+}
+<div>
+    @Html.ActionLink("Powrót do listy", "Index")
+</div>

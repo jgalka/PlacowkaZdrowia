@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PlacowkaZdrowia.ViewModels.RejestracjaDateGroup>
+           
+@{
+    ViewBag.Title = "Terminarz";
+}
+
+<h2>Terminarz</h2>
+
+<table>
+    <tr>
+        <th>
+            Data rejestracji
+        </th>
+        <th>
+            Pacjenci
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @String.Format("{0:d}", item.DataRejestracji)
+        </td>
+        <td>
+            @item.PacjentCount
+        </td>
+    </tr>
+}
+</table>

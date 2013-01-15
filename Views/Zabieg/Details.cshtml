@@ -1,0 +1,37 @@
+﻿@model PlacowkaZdrowia.Models.Zabieg
+
+@{
+    ViewBag.Title = "Szcegoly";
+}
+
+<h2>Szcegóły</h2>
+
+<fieldset>
+    <legend>Zabieg</legend>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ZabiegID)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.ZabiegID)
+    </div>
+
+    <div class="display-label">Tytul</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tytul)
+    </div>
+
+    <div class="display-label">Koszty</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Koszty)
+    </div>
+
+    <div class="display-label">Dzial</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Dzial.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id=Model.ZabiegID }) |
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>

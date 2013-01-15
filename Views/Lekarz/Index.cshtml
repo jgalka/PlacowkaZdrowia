@@ -1,0 +1,120 @@
+﻿@model PlacowkaZdrowia.ViewModels.LekarzIndexData
+
+@{
+    ViewBag.Title = "Lekarze";
+}
+
+<h2>Lekarze</h2>
+
+<p>
+    @Html.ActionLink("Utwórz nowy", "Create")
+</p>
+<table> 
+    <tr> 
+        <th></th> 
+        <th>Nazwisko</th> 
+        <th>Imię</th> 
+        <th>Data zatrudnienia</th> 
+        <th>Adres</th>
+        <th>Zabiegi</th>
+    </tr> 
+    @foreach (var item in Model.Lekarze) 
+    { 
+        string selectedRow = ""; 
+        if (item.OsobaID == ViewBag.OsobaID) 
+        { 
+            selectedRow = "selectedrow"; 
+        } 
+        <tr class="@selectedRow" valign="top"> 
+            <td> 
+                @Html.ActionLink("Wybierz", "Index", new { id = item.OsobaID }) | 
+                @Html.ActionLink("Edycja", "Edit", new { id = item.OsobaID }) | 
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.OsobaID }) | 
+                @Html.ActionLink("Usuń", "Delete", new { id = item.OsobaID }) 
+            </td> 
+            <td> 
+                @item.Nazwisko 
+            </td> 
+            <td> 
+                @item.Imie 
+            </td> 
+            <td> 
+                @String.Format("{0:d}", item.HireDate) 
+            </td> 
+            <td> 
+                @if (item.OfficeAssignment != null) 
+                { 
+                    @item.OfficeAssignment.Location  
+                } 
+            </td> 
+            <td>
+                @{
+                    foreach (var zabieg in item.Zabiegi)
+                    {
+                        @zabieg.ZabiegID @:&nbsp; @zabieg.Tytul <br />
+                    }
+                }
+            </td>
+        </tr> 
+    } 
+</table>
+
+@if (Model.Zabiegi != null) 
+{ 
+    <h3>Zabiegi wykonywane przez wybranego lekarza</h3> 
+<table> 
+    <tr> 
+        <th></th> 
+        <th>ID</th> 
+        <th>Tytuł</th> 
+        <th>Dział</th> 
+    </tr> 
+ 
+    @foreach (var item in Model.Zabiegi) 
+    { 
+        string selectedRow = "";
+        if (item.ZabiegID == ViewBag.ZabiegID) 
+        { 
+            selectedRow = "selectedrow"; 
+        } 
+    <tr class="@selectedRow"> 
+        <td> 
+            @Html.ActionLink("Wybierz", "Index", new { zabiegID = item.ZabiegID }) 
+        </td> 
+        <td> 
+            @item.ZabiegID 
+        </td> 
+        <td> 
+            @item.Tytul 
+        </td> 
+        <td> 
+            @item.Dzial.Name 
+        </td> 
+    </tr> 
+    } 
+ 
+</table> 
+}
+
+@if (Model.Rejestracje != null) 
+{ 
+    <h3> 
+        Pacjenci zapisanie na zabiegi</h3> 
+    <table> 
+        <tr> 
+            <th>Nazwa</th> 
+            <th>Typ</th> 
+        </tr> 
+        @foreach (var item in Model.Rejestracje) 
+        { 
+            <tr> 
+                <td> 
+                    @item.Pacjent.FullName
+                </td> 
+                <td> 
+                    @Html.DisplayFor(modelItem => item.Typ)
+                </td> 
+            </tr> 
+        } 
+    </table> 
+}
